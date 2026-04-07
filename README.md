@@ -238,6 +238,36 @@ With Secure Data Factory, you can:
 - Customize generation with pluggable policies for GDPR, HIPAA, or PCIDSS compliance.
 - Export generated data in formats suitable for databases, APIs, or file-based fixtures.
 
+## Why This Project Exists
+
+**Problem**: Most fake data generators create realistic-looking data without security controls, compliance features, or audit trails. This leads to:
+- Accidental use of "real-looking" test data in production
+- Non-compliance with GDPR, HIPAA, or PCIDSS in test environments
+- No traceability of how test data was generated
+- Poor performance in CI/CD pipelines requiring large datasets
+
+**Solution**: Secure Data Factory provides:
+- Synthetic data with built-in safety (`.example` domains, reserved IPs)
+- Security levels from AES-128 to AES-256-GCM
+- Pre-built compliance policies (GDPR, HIPAA, PCIDSS)
+- Full audit trail and checksums for every generated record
+- High-throughput parallel processing for large test datasets
+
+## Licensing
+
+This project is licensed under **Apache License 2.0**.
+
+- You are free to use, modify, and distribute this software for any purpose.
+- Commercial use is permitted.
+- The license comes with no warranties or liability.
+- See the full [LICENSE](LICENSE) file for details.
+
+**Why Apache 2.0?**
+- Widely recognized and compatible with both proprietary and open-source projects
+- Used by major projects (Apache Commons, Spring, Kubernetes)
+- Provides patent protections for contributors
+- Allows use in closed-source commercial products
+
 ## Advantages
 
 - **Security-First Approach**: Unlike basic faker libraries, it includes encryption, anonymization, and policy enforcement to ensure safe handling of even synthetic data.
@@ -248,6 +278,21 @@ With Secure Data Factory, you can:
 - **Dummy-Safe Conventions**: Uses reserved domains and identifiers to prevent accidental use in production.
 - **Flexibility**: Configurable security levels allow tailoring to different environments (dev, staging, prod-like tests).
 - **Open Source**: Apache 2.0 license allows free use and contribution.
+
+## Recognition & Comparison
+
+Secure Data Factory stands out from other fake data generators:
+
+| Feature | Secure Data Factory | JavaFaker | MockNeat |
+|---------|---------------------|-----------|----------|
+| Built-in encryption | AES-128 to AES-256-GCM | No | No |
+| Compliance policies | GDPR, HIPAA, PCIDSS | No | No |
+| Audit trail | Full logging | No | No |
+| Parallel processing | Yes (BatchProcessor) | No | No |
+| Dummy-safe (.example) | Yes | No | No |
+| Checksums | SHA-256/512 | No | No |
+
+For a detailed comparison, see [docs/COMPARISON.md](docs/COMPARISON.md).
 
 ## Working Securely with Dummy Data
 

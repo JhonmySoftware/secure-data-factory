@@ -11,7 +11,22 @@
 
     <name>Secure Data Factory</name>
     <description>A library for generating secure anonymized test data compliant with GDPR and security policies</description>
-    <url>https://github.com/your-org/secure-data-factory</url>
+    <url>https://github.com/JhonmySoftware/secure-data-factory</url>
+
+    <developers>
+        <developer>
+            <id>JhonmySoftware</id>
+            <name>Jhon Quiñones Arboleda</name>
+            <email>jhonquinonesarboleda@gmail.com</email>
+            <url>https://github.com/JhonmySoftware</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/JhonmySoftware/secure-data-factory.git</connection>
+        <developerConnection>scm:git:https://github.com/JhonmySoftware/secure-data-factory.git</developerConnection>
+        <url>https://github.com/JhonmySoftware/secure-data-factory</url>
+    </scm>
 
     <licenses>
         <license>
