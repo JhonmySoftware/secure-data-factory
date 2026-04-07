@@ -59,6 +59,34 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 </dependency>
 ```
 
+### Gradle dependency
+
+```groovy
+dependencies {
+    testImplementation 'io.github.sdf:secure-data-factory-core:1.0.0-SNAPSHOT'
+}
+```
+
+Or for Kotlin DSL:
+
+```kotlin
+dependencies {
+    testImplementation("io.github.sdf:secure-data-factory-core:1.0.0-SNAPSHOT")
+}
+```
+
+> **Note**: Replace `1.0.0-SNAPSHOT` with the released version when available on Maven Central.
+
+### Gradle repository (for SNAPSHOT versions)
+
+```groovy
+repositories {
+    maven { url 'https://repo.maven.apache.org/maven2' }
+    // For SNAPSHOT versions, add:
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+```
+
 ### Generate a person
 
 ```java
@@ -236,6 +264,54 @@ Even though Secure Data Factory generates synthetic and random data, it's crucia
 - **Isolate Environments**: Use generated data only in designated test, dev, or demo environments to prevent leakage.
 
 By following these practices, you ensure that even dummy data is handled with the same care as real data, promoting secure development workflows.
+
+---
+
+## Build & Development
+
+### Prerequisites
+
+- Java 8+
+- Maven 3.6+
+
+### Compile
+
+```bash
+mvn compile
+```
+
+### Run tests
+
+```bash
+mvn test
+```
+
+### Build JAR
+
+```bash
+mvn package
+```
+
+### Run examples
+
+```bash
+mvn -pl examples exec:java -Dexec.mainClass="examples.BasicExample"
+```
+
+Available examples:
+- `examples.BasicExample` - Basic usage
+- `examples.BusinessDummyDataExample` - Business data generation
+- `examples.PlainDataGenerationExample` - Plain (unencrypted) data
+- `examples.QaSandboxSeedExample` - QA sandbox seed package
+- `examples.MassiveGenerationExample` - High-throughput batch generation
+- `examples.BankingDataExample` - Financial data generation
+- `examples.LatamColombiaExample` - Regional data (Latam/Colombia)
+
+### Install locally
+
+```bash
+mvn install
+```
 
 ---
 
