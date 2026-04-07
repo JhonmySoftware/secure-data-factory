@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        java: [ 17, 21 ]
+        java: [ 8, 11, 17 ]
 
     steps:
       - name: Checkout
@@ -35,11 +35,4 @@ jobs:
         with:
           name: surefire-reports-java${{ matrix.java }}
           path: '**/target/surefire-reports/*.xml'
-          retention-days: 7
-
-      - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-java${{ matrix.java }}
-          path: '**/target/site/jacoco/'
           retention-days: 7
