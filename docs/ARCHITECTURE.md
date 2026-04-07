@@ -47,6 +47,7 @@ Implements `DataGenerator<T>`. The generator layer combines Java Faker with cura
 - `GDPRPolicy`: EU General Data Protection Regulation — hashes nationalId, masks email/phone, removes addresses. Requires `HIGH` security level.
 - `HIPAAPolicy`: US Health Insurance Portability and Accountability Act — pseudonymizes names, masks emails, shifts birth year. Requires `HIGH` security level.
 - `PCIDSSPolicy`: Payment Card Industry Data Security Standard — masks PAN-related data, protects cardholder information. Requires `CRITICAL` security level.
+- `ColombianDataProtectionPolicy`: Ley 1581 de 2012 (Habeas Data) — protects personal data per Colombian data protection law. Requires `HIGH` security level.
 
 ### 5. Audit Layer - `audit/`
 
