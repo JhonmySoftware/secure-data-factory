@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Unit Tests — Java ${{ matrix.java }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java: [ 17, 21 ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: temurin
+          cache: maven
+
+      - name: Build & Test
+        run: mvn --batch-mode clean verify
+
+      - name: Upload Surefire Reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports-java${{ matrix.java }}
+          path: '**/target/surefire-reports/*.xml'
+          retention-days: 7
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-java${{ matrix.java }}
+          path: '**/target/site/jacoco/'
+          retention-days: 7

@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Suppress noisy library output during tests -->
+    <logger name="com.github.javafaker" level="WARN"/>
+    <logger name="org.bouncycastle"     level="WARN"/>
+
+    <!-- Show SDF logs at DEBUG level during tests -->
+    <logger name="io.github.sdf" level="DEBUG"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

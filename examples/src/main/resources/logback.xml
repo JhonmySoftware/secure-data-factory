@@ -1,0 +1,15 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.github.javafaker" level="WARN"/>
+    <logger name="org.bouncycastle" level="WARN"/>
+    <logger name="io.github.sdf" level="WARN"/>
+
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
