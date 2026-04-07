@@ -54,8 +54,7 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 <dependency>
     <groupId>io.github.sdf</groupId>
     <artifactId>secure-data-factory-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <scope>test</scope>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -63,7 +62,7 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 
 ```groovy
 dependencies {
-    testImplementation 'io.github.sdf:secure-data-factory-core:1.0.0-SNAPSHOT'
+    implementation 'io.github.sdf:secure-data-factory-core:1.0.0'
 }
 ```
 
@@ -71,19 +70,15 @@ Or for Kotlin DSL:
 
 ```kotlin
 dependencies {
-    testImplementation("io.github.sdf:secure-data-factory-core:1.0.0-SNAPSHOT")
+    implementation("io.github.sdf:secure-data-factory-core:1.0.0")
 }
 ```
 
-> **Note**: Replace `1.0.0-SNAPSHOT` with the released version when available on Maven Central.
-
-### Gradle repository (for SNAPSHOT versions)
+### Gradle repository (if using older Gradle versions)
 
 ```groovy
 repositories {
-    maven { url 'https://repo.maven.apache.org/maven2' }
-    // For SNAPSHOT versions, add:
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    mavenCentral()
 }
 ```
 
@@ -381,3 +376,21 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE).
+
+## Versions & Updates
+
+Check for new releases on GitHub: https://github.com/JhonmySoftware/secure-data-factory/releases
+
+To update to a newer version, simply change the version number in your dependency:
+
+```xml
+<!-- Maven -->
+<version>1.1.0</version>
+```
+
+```groovy
+// Gradle
+implementation 'io.github.sdf:secure-data-factory-core:1.1.0'
+```
+
+To see all available versions, visit Maven Central: https://search.maven.org/artifact/io.github.sdf/secure-data-factory-core
