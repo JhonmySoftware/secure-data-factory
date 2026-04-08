@@ -32,13 +32,26 @@ jobs:
       - name: Build with source only (skip javadoc for now)
         run: mvn --batch-mode clean package source:jar -DskipTests -Dmaven.javadoc.skip=true
 
+      - name: Debug - list files
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Files in target:"
+          ls -la secure-data-factory-core/target/
+
       - name: Upload to Central Portal
         run: |
           VERSION=${{ steps.version.outputs.VERSION }}
+          
+          echo "=== Debugging ==="
+          echo "VERSION=${VERSION}"
+          echo "POM file:"
+          ls -la secure-data-factory-core/target/secure-data-factory-core-${VERSION}.pom
+          
           BEARER_TOKEN=$(echo -n "${{ secrets.OSSRH_USERNAME }}:${{ secrets.OSSRH_PASSWORD }}" | base64 -w0)
+          echo "Bearer token length: ${#BEARER_TOKEN}"
           
           echo "Uploading POM..."
-          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
+          curl -v -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
             -H "Authorization: Bearer ${BEARER_TOKEN}" \
             -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}.pom"
           
