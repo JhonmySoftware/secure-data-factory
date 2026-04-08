@@ -33,12 +33,9 @@ jobs:
         run: mvn --batch-mode clean package source:jar -DskipTests -Dmaven.javadoc.skip=true
 
       - name: Upload to Central Portal
-        env:
-          TOKEN_USER: ${{ secrets.OSSRH_USERNAME }}
-          TOKEN_PASS: ${{ secrets.OSSRH_PASSWORD }}
         run: |
           VERSION=${{ steps.version.outputs.VERSION }}
-          BEARER_TOKEN=$(echo -n "${TOKEN_USER}:${TOKEN_PASS}" | base64 -w0)
+          BEARER_TOKEN=$(echo -n "${{ secrets.OSSRH_USERNAME }}:${{ secrets.OSSRH_PASSWORD }}" | base64 -w0)
           
           echo "Uploading POM..."
           curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
@@ -56,11 +53,8 @@ jobs:
             -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}-sources.jar"
 
       - name: Publish deployment
-        env:
-          TOKEN_USER: ${{ secrets.OSSRH_USERNAME }}
-          TOKEN_PASS: ${{ secrets.OSSRH_PASSWORD }}
         run: |
-          BEARER_TOKEN=$(echo -n "${TOKEN_USER}:${TOKEN_PASS}" | base64 -w0)
+          BEARER_TOKEN=$(echo -n "${{ secrets.OSSRH_USERNAME }}:${{ secrets.OSSRH_PASSWORD }}" | base64 -w0)
           
           curl -X POST "https://central.sonatype.com/api/v1/publisher/status" \
             -H "Authorization: Bearer ${BEARER_TOKEN}" \
