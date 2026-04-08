@@ -579,7 +579,47 @@ By following these practices, you ensure that even dummy data is handled with th
 
 ---
 
-## Build & Development
+## Recommended IDEs
+
+This project can be developed with any Java-compatible IDE. The following are recommended:
+
+### IntelliJ IDEA (Recommended)
+
+- **Version**: 2023.2 or later
+- **Edition**: Community (free) or Ultimate
+- **Features**: Best for Java/Maven projects, excellent debugging, built-in terminal
+- **Setup**:
+  1. File → Open → Select `pom.xml`
+  2. Maven will be auto-detected
+  3. Run/Debug configurations available
+
+### VS Code
+
+- **Extension**: Extension Pack for Java (Microsoft)
+- **Extension**: Maven for Java
+- **Features**: Lightweight, good for smaller projects
+
+### Eclipse
+
+- **Version**: 2023-12 or later
+- **Plugin**: Maven Integration (M2E)
+- **Features**: Good for enterprise Java projects
+
+### IDE Setup
+
+```bash
+# Clone the project
+git clone https://github.com/JhonmySoftware/secure-data-factory.git
+cd secure-data-factory
+
+# Build locally
+mvn clean install -DskipTests
+
+# Open in your IDE
+# For IntelliJ: File → Open → pom.xml
+```
+
+### Build & Development
 
 ### Prerequisites
 
