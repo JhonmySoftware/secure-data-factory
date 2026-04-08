@@ -29,14 +29,17 @@ jobs:
       - name: Set project version
         run: mvn --batch-mode versions:set -DnewVersion=${{ steps.version.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Build with install (generates POM)
-        run: mvn --batch-mode clean install -DskipTests -Dmaven.javadoc.skip=true -DskipSourceJar=true
+      - name: Build and install
+        run: mvn --batch-mode clean install -DskipTests -Dmaven.javadoc.skip=true -DskipSourceJar=true -pl secure-data-factory-core
 
       - name: Debug - list files
         run: |
           echo "Current directory: $(pwd)"
           echo "Files in core target:"
           ls -la secure-data-factory-core/target/
+          echo ""
+          echo "Looking for POM:"
+          find secure-data-factory-core/target -name "*.pom" -type f
 
       - name: Upload to Central Portal
         run: |
