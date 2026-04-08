@@ -20,11 +20,6 @@ jobs:
           java-version: '17'
           distribution: temurin
           cache: maven
-          server-id: central
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Extract version from tag
         id: version
@@ -33,12 +28,48 @@ jobs:
       - name: Set project version
         run: mvn --batch-mode versions:set -DnewVersion=${{ steps.version.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Build and publish
-        run: mvn --batch-mode clean deploy -P release -DskipTests
+      - name: Build with source and javadoc
+        run: mvn --batch-mode clean package source:jar javadoc:jar -DskipTests
+
+      - name: Upload to Central Portal
         env:
-          MAVEN_USERNAME:       ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD:       ${{ secrets.OSSRH_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          TOKEN_USER: ${{ secrets.OSSRH_USERNAME }}
+          TOKEN_PASS: ${{ secrets.OSSRH_PASSWORD }}
+        run: |
+          VERSION=${{ steps.version.outputs.VERSION }}
+          BEARER_TOKEN=$(echo -n "${TOKEN_USER}:${TOKEN_PASS}" | base64 -w0)
+          
+          echo "Uploading POM..."
+          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
+            -H "Authorization: Bearer ${BEARER_TOKEN}" \
+            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}.pom"
+          
+          echo "Uploading JAR..."
+          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
+            -H "Authorization: Bearer ${BEARER_TOKEN}" \
+            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}.jar"
+          
+          echo "Uploading Sources JAR..."
+          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
+            -H "Authorization: Bearer ${BEARER_TOKEN}" \
+            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}-sources.jar"
+          
+          echo "Uploading Javadoc JAR..."
+          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
+            -H "Authorization: Bearer ${BEARER_TOKEN}" \
+            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}-javadoc.jar"
+
+      - name: Publish deployment
+        env:
+          TOKEN_USER: ${{ secrets.OSSRH_USERNAME }}
+          TOKEN_PASS: ${{ secrets.OSSRH_PASSWORD }}
+        run: |
+          BEARER_TOKEN=$(echo -n "${TOKEN_USER}:${TOKEN_PASS}" | base64 -w0)
+          
+          curl -X POST "https://central.sonatype.com/api/v1/publisher/status" \
+            -H "Authorization: Bearer ${BEARER_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d '{"action":"PUBLISH"}'
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
