@@ -157,12 +157,18 @@
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>${maven.gpg.plugin.version}</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.sonatype.nexus.buildsupport</groupId>
-                    <artifactId>nexus-buildsupport-plugin</artifactId>
-                    <version>${maven.nexus.staging.plugin.version}</version>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>
