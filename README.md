@@ -52,7 +52,7 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 
 ```xml
 <dependency>
-    <groupId>io.github.sdf</groupId>
+    <groupId>io.github.jhonmysoftware</groupId>
     <artifactId>secure-data-factory-core</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -62,7 +62,7 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 
 ```groovy
 dependencies {
-    implementation 'io.github.sdf:secure-data-factory-core:1.0.0'
+    implementation 'io.github.jhonmysoftware:secure-data-factory-core:1.0.0'
 }
 ```
 
@@ -70,7 +70,7 @@ Or for Kotlin DSL:
 
 ```kotlin
 dependencies {
-    implementation("io.github.sdf:secure-data-factory-core:1.0.0")
+    implementation("io.github.jhonmysoftware:secure-data-factory-core:1.0.0")
 }
 ```
 
@@ -390,7 +390,7 @@ To update to a newer version, simply change the version number in your dependenc
 
 ```groovy
 // Gradle
-implementation 'io.github.sdf:secure-data-factory-core:1.1.0'
+implementation 'io.github.jhonmysoftware:secure-data-factory-core:1.1.0'
 ```
 
-To see all available versions, visit Maven Central: https://search.maven.org/artifact/io.github.sdf/secure-data-factory-core
+To see all available versions, visit Maven Central: https://search.maven.org/artifact/io.github.jhonmysoftware/secure-data-factory-core
