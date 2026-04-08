@@ -29,42 +29,11 @@ jobs:
       - name: Set project version
         run: mvn --batch-mode versions:set -DnewVersion=${{ steps.version.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Build and install
-        run: |
-          mvn --batch-mode clean install -DskipTests -Dmaven.javadoc.skip=true -pl secure-data-factory-core -am 2>&1
-          echo "=== Build complete, checking files ==="
-          ls -la secure-data-factory-core/target/
-
-      - name: Upload to Central Portal
-        run: |
-          VERSION=${{ steps.version.outputs.VERSION }}
-          
-          echo "=== Debugging ==="
-          echo "VERSION=${VERSION}"
-          echo "POM file:"
-          ls -la secure-data-factory-core/target/secure-data-factory-core-${VERSION}.pom
-          
-          BEARER_TOKEN=$(echo -n "${{ secrets.OSSRH_USERNAME }}:${{ secrets.OSSRH_PASSWORD }}" | base64 -w0)
-          echo "Bearer token length: ${#BEARER_TOKEN}"
-          
-          echo "Uploading POM..."
-          curl -v -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
-            -H "Authorization: Bearer ${BEARER_TOKEN}" \
-            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}.pom"
-          
-          echo "Uploading JAR..."
-          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
-            -H "Authorization: Bearer ${BEARER_TOKEN}" \
-            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}.jar"
-
-      - name: Publish deployment
-        run: |
-          BEARER_TOKEN=$(echo -n "${{ secrets.OSSRH_USERNAME }}:${{ secrets.OSSRH_PASSWORD }}" | base64 -w0)
-          
-          curl -X POST "https://central.sonatype.com/api/v1/publisher/status" \
-            -H "Authorization: Bearer ${BEARER_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d '{"action":"PUBLISH"}'
+      - name: Publish to Central
+        run: mvn --batch-mode deploy -DskipTests -Dmaven.javadoc.skip=true
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
