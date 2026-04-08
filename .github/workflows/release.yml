@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and install
         run: |
-          mvn --batch-mode clean install -DskipTests -Dmaven.javadoc.skip=true -pl secure-data-factory-core -am
+          mvn --batch-mode clean install -DskipTests -Dmaven.javadoc.skip=true -pl secure-data-factory-core -am 2>&1
           echo "=== Build complete, checking files ==="
           ls -la secure-data-factory-core/target/
 
