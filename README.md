@@ -46,6 +46,240 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 
 ---
 
+## Annotation-Based Data Generation
+
+Secure Data Factory supports generating data using **Java annotations** on your model classes. This provides a declarative, type-safe way to define synthetic data fields.
+
+### Add dependency
+
+```xml
+<dependency>
+    <groupId>io.github.jhonmysoftware</groupId>
+    <artifactId>secure-data-factory-core</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+### Basic Usage
+
+Define your model class with `@SdfField` annotations:
+
+```java
+import io.github.sdf.annotation.SdfField;
+import io.github.sdf.annotation.DataType;
+
+public class User {
+    
+    @SdfField(DataType.FIRST_NAME)
+    private String firstName;
+    
+    @SdfField(DataType.LAST_NAME)
+    private String lastName;
+    
+    @SdfField(DataType.EMAIL)
+    private String email;
+    
+    @SdfField(DataType.PHONE)
+    private String phone;
+    
+    @SdfField(DataType.ADDRESS)
+    private String address;
+    
+    @SdfField(DataType.UUID)
+    private String userId;
+    
+    @SdfField(value = DataType.INTEGER, min = 18, max = 65)
+    private int age;
+    
+    // This field will be ignored during generation
+    @SdfField(ignore = true)
+    private String internalId;
+}
+```
+
+Generate data:
+
+```java
+import io.github.sdf.annotation.AnnotationProcessor;
+
+User user = AnnotationProcessor.process(User.class);
+
+System.out.println(user.getFirstName());   // e.g., "John"
+System.out.println(user.getEmail());       // e.g., "john.smith@example.com"
+System.out.println(user.getPhone());       // e.g., "+15550001234"
+System.out.println(user.getAge());         // e.g., 32
+```
+
+### Using with SecureDataFactory
+
+For encrypted output with audit trail:
+
+```java
+import io.github.sdf.SecureDataFactory;
+import io.github.sdf.SecureData;
+import io.github.sdf.crypto.SecurityLevel;
+
+SecureDataFactory factory = SecureDataFactory.builder()
+        .securityLevel(SecurityLevel.HIGH)
+        .enableAudit(true)
+        .build();
+
+User user = AnnotationProcessor.process(User.class);
+SecureData<User> result = factory.wrap(user);
+
+System.out.println(result.getData().getEmail());
+System.out.println(result.getChecksum());
+```
+
+### Available Data Types
+
+#### Person Data
+| DataType | Description |
+|----------|-------------|
+| `FIRST_NAME` | Person first name |
+| `LAST_NAME` | Person last name |
+| `FULL_NAME` | Full person name |
+| `EMAIL` | Email address (synthetic domain) |
+| `PHONE` | Phone number |
+| `NATIONAL_ID` | National identification number |
+| `PASSPORT` | Passport number |
+| `BIRTH_DATE` | Date of birth |
+
+#### Address Data
+| DataType | Description |
+|----------|-------------|
+| `STREET_ADDRESS` | Street address |
+| `CITY` | City name |
+| `STATE` | State or province |
+| `COUNTRY` | Country name |
+| `ZIP_CODE` | Postal/ZIP code |
+| `FULL_ADDRESS` | Complete address |
+
+#### Company Data
+| DataType | Description |
+|----------|-------------|
+| `COMPANY_NAME` | Company business name |
+| `COMPANY_WEBSITE` | Company website (.example) |
+| `COMPANY_TAX_ID` | Tax identification number |
+
+#### Financial Data
+| DataType | Description |
+|----------|-------------|
+| `CREDIT_CARD` | Credit card number |
+| `BANK_ACCOUNT` | Bank account number |
+| `IBAN` | International Bank Account Number |
+| `SWIFT_CODE` | SWIFT/BIC code |
+| `CURRENCY_CODE` | Currency code (USD, EUR, etc.) |
+| `AMOUNT` | Monetary amount |
+| `PRICE` | Product price |
+
+#### Device & Network
+| DataType | Description |
+|----------|-------------|
+| `IP_ADDRESS` | IPv4 address |
+| `IPV6_ADDRESS` | IPv6 address |
+| `MAC_ADDRESS` | Network MAC address |
+| `HOSTNAME` | Computer hostname |
+| `USER_AGENT` | Browser user agent |
+| `IMEI` | Mobile device IMEI |
+| `PLATFORM` | OS platform |
+
+#### Document & Reference
+| DataType | Description |
+|----------|-------------|
+| `INVOICE_NUMBER` | Invoice reference |
+| `ORDER_NUMBER` | Order reference |
+| `TRANSACTION_ID` | Transaction identifier |
+| `UUID` | UUID |
+
+#### Web & Internet
+| DataType | Description |
+|----------|-------------|
+| `URL` | Full URL |
+| `DOMAIN` | Domain name |
+| `USERNAME` | Username |
+| `PASSWORD` | Secure random password |
+
+#### Technical
+| DataType | Description |
+|----------|-------------|
+| `INTEGER` | Integer number |
+| `LONG` | Long integer |
+| `DOUBLE` | Double precision number |
+| `BOOLEAN` | Boolean true/false |
+| `TEXT` | Lorem ipsum text |
+| `WORD` | Single random word |
+| `SENTENCE` | Random sentence |
+| `PARAGRAPH` | Random paragraph |
+| `DATE` | Date |
+| `TIME` | Time of day |
+| `DATETIME` | Date and time |
+| `TIMESTAMP` | Unix timestamp |
+| `HEX_COLOR` | Hex color code |
+| `LOCALE` | Locale identifier |
+| `LANGUAGE` | Language code |
+
+### Annotation Options
+
+```java
+public class Example {
+    
+    // Specify exact data type
+    @SdfField(DataType.EMAIL)
+    private String email;
+    
+    // Specify country for phone numbers
+    @SdfField(value = DataType.PHONE, country = "CO")
+    private String mobilePhone;
+    
+    // Numeric range for integers/doubles
+    @SdfField(value = DataType.INTEGER, min = 100, max = 9999)
+    private int quantity;
+    
+    // Numeric range for doubles
+    @SdfField(value = DataType.DOUBLE, min = 10.0, max = 1000.0)
+    private double price;
+    
+    // Ignore field (skip generation)
+    @SdfField(ignore = true)
+    private String skipThis;
+    
+    // Auto-detect based on field name
+    @SdfField(DataType.AUTO)
+    private String emailAddress;  // Will be detected as EMAIL
+}
+```
+
+### AUTO Detection
+
+When `DataType.AUTO` is used, the processor automatically infers the type based on field name:
+
+| Field Name Pattern | Inferred Type |
+|-------------------|---------------|
+| `email`, `emailAddress` | `EMAIL` |
+| `phone`, `mobile` | `PHONE` |
+| `firstname` | `FIRST_NAME` |
+| `lastname`, `surname` | `LAST_NAME` |
+| `city` | `CITY` |
+| `country` | `COUNTRY` |
+| `zip`, `postal` | `ZIP_CODE` |
+| `address` | `FULL_ADDRESS` |
+| `companyName` | `COMPANY_NAME` |
+| `password` | `PASSWORD` |
+| `username` | `USERNAME` |
+| `ipAddress` | `IP_ADDRESS` |
+| `uuid` | `UUID` |
+| `card`, `credit` | `CREDIT_CARD` |
+| Other String fields | `WORD` |
+
+For non-String fields:
+- `int/Integer` → `INTEGER`
+- `long/Long` → `LONG`
+- `double/Double` → `DOUBLE`
+- `boolean/Boolean` → `BOOLEAN`
+
+---
+
 ## Quick Start
 
 ### Option 1: Maven Central (recommended)
