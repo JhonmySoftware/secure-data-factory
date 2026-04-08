@@ -26,6 +26,8 @@ import java.util.Random;
  * <p>Uses country prefixes that exist but generates subscriber numbers
  * that fall outside real allocations (prefixed with 555 for US, or
  * with leading zeros for international formats).</p>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class PhoneGenerator implements DataGenerator<String> {
 

@@ -29,6 +29,8 @@ import java.util.Random;
  * <p>Addresses are guaranteed to follow RFC 5322 local-part rules and use
  * well-known example domains (example.com, test.org, etc.) that cannot
  * be mistaken for real users.</p>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class EmailGenerator implements DataGenerator<String> {
 

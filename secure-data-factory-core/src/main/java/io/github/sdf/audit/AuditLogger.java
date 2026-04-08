@@ -28,13 +28,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * <p>Records all security-relevant events and dispatches them to registered
  * {@link AuditListener} instances. Thread-safe.</p>
  *
- * <pre>{@code
- * AuditLogger logger = new AuditLogger("my-service");
- * logger.addListener(event -> System.out.println(event));
- * logger.log(AuditEvent.builder(AuditEvent.EventType.DATA_GENERATED)
- *         .description("Generated 100 Person records")
- *         .build());
- * }</pre>
+ * @author Jhon Quiñones Arboleda
  */
 public class AuditLogger {
 

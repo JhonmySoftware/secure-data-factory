@@ -21,6 +21,8 @@ import java.util.Objects;
 
 /**
  * Represents a synthetic financial account for development and QA.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BankAccount {

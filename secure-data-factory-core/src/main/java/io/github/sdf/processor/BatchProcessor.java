@@ -29,6 +29,12 @@ import io.github.sdf.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Processes batch generation of secure data using parallel execution.
+ *
+ * @author Jhon Quiñones Arboleda
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

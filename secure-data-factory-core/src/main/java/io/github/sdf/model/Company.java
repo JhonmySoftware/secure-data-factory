@@ -21,6 +21,8 @@ import java.util.Objects;
 
 /**
  * Represents a synthetic company record for development and test environments.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Company {

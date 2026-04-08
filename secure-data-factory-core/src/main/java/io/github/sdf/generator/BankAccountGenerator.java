@@ -25,6 +25,8 @@ import java.util.UUID;
 
 /**
  * Generates synthetic financial account records for dev and QA scenarios.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class BankAccountGenerator implements DataGenerator<BankAccount> {
 

@@ -17,6 +17,8 @@ package io.github.sdf.exception;
 
 /**
  * Exception thrown when data generation fails.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class GenerationException extends RuntimeException {
 

@@ -22,6 +22,8 @@ import java.util.Objects;
 
 /**
  * Represents a synthetic product or catalog item for development and QA.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {

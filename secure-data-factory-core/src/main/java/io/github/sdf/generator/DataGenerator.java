@@ -23,6 +23,7 @@ import java.util.List;
  * Base contract for all data generators.
  *
  * @param <T> the type of object this generator produces
+ * @author Jhon Quiñones Arboleda
  */
 public interface DataGenerator<T> {
 

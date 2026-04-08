@@ -52,6 +52,8 @@ import java.util.stream.Collectors;
  *
  * <p>Orchestrates data generation, cryptographic protection, policy enforcement,
  * and audit logging in a single fluent API.</p>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class SecureDataFactory {
 

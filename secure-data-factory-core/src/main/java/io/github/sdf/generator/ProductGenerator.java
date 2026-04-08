@@ -27,6 +27,8 @@ import java.util.UUID;
 
 /**
  * Generates synthetic product and catalog records for dummy commerce scenarios.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class ProductGenerator implements DataGenerator<Product> {
 

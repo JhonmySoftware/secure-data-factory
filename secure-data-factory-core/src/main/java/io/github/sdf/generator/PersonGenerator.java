@@ -39,6 +39,8 @@ import java.util.concurrent.TimeUnit;
  * Person person  = generator.generate();
  * List<Person> batch = generator.generate(1000);
  * }</pre>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class PersonGenerator implements DataGenerator<Person> {
 

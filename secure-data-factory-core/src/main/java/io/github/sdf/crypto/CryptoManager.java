@@ -38,7 +38,7 @@ import java.util.Objects;
  * Manages all cryptographic operations for the Secure Data Factory.
  * Supports AES-CBC, AES-GCM, SHA-256/SHA-512 hashing and anonymization.
  *
- * <p>Thread-safe: a single instance can be shared across generators.</p>
+ * @author Jhon Quiñones Arboleda
  */
 public class CryptoManager {
 

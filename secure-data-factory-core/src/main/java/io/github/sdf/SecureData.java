@@ -31,6 +31,7 @@ import java.util.Objects;
  * recorded during generation, and a creation timestamp.</p>
  *
  * @param <T> the type of the wrapped data object
+ * @author Jhon Quiñones Arboleda
  */
 public final class SecureData<T> {
 

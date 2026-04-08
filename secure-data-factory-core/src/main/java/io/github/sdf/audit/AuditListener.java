@@ -18,6 +18,8 @@ package io.github.sdf.audit;
 /**
  * Listener interface for receiving audit events.
  * Implement and register with {@link AuditLogger} to hook into the audit pipeline.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @FunctionalInterface
 public interface AuditListener {

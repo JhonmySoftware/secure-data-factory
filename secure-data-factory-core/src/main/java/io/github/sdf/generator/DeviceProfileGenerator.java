@@ -25,6 +25,8 @@ import java.util.UUID;
 
 /**
  * Generates synthetic client/device profiles for authentication, telemetry, and QA flows.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class DeviceProfileGenerator implements DataGenerator<DeviceProfile> {
 

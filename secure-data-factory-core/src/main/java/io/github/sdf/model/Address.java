@@ -23,6 +23,8 @@ import java.util.Objects;
 
 /**
  * Represents a synthetic address intended for development and test scenarios.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Address {

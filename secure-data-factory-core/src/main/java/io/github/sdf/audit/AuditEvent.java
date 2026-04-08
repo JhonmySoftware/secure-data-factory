@@ -23,6 +23,8 @@ import java.util.UUID;
 
 /**
  * Immutable record of a single auditable action performed by the factory.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public final class AuditEvent {
 

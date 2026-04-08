@@ -23,6 +23,8 @@ import java.util.Random;
 
 /**
  * Generates generic synthetic document and reference identifiers for QA workflows.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class DocumentGenerator implements DataGenerator<String> {
 

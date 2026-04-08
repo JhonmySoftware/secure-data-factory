@@ -23,6 +23,8 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Strategies available for anonymizing PII fields.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public enum AnonymizationStrategy {
 

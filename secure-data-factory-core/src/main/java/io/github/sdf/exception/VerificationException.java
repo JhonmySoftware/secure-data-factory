@@ -17,6 +17,8 @@ package io.github.sdf.exception;
 
 /**
  * Exception thrown when cryptographic verification or policy validation fails.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class VerificationException extends RuntimeException {
 

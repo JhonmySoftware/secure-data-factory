@@ -21,6 +21,11 @@ import io.github.sdf.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Enforces PCI-DSS compliance on generated data.
+ *
+ * @author Jhon Quiñones Arboleda
+ */
 public class PCIDSSPolicy implements SecurityPolicy {
 
     private static final Logger log = LoggerFactory.getLogger(PCIDSSPolicy.class);

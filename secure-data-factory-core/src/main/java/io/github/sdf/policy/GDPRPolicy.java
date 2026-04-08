@@ -32,6 +32,8 @@ import org.slf4j.LoggerFactory;
  *   <li>Addresses are reduced to city + country only.</li>
  *   <li>Minimum security level: {@link SecurityLevel#HIGH}.</li>
  * </ul>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class GDPRPolicy implements SecurityPolicy {
 

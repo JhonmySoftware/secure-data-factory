@@ -25,6 +25,8 @@ import java.util.UUID;
 
 /**
  * Generates clearly synthetic but structurally useful addresses for QA and development.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class AddressGenerator implements DataGenerator<Address> {
 

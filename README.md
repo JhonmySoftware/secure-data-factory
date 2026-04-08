@@ -417,18 +417,47 @@ Apache License 2.0. See [LICENSE](LICENSE).
 
 ## Versions & Updates
 
-Check for new releases on GitHub: https://github.com/JhonmySoftware/secure-data-factory/releases
+### How versioning works
 
-To update to a newer version, simply change the version number in your dependency:
+| Release Type | When to bump | Example |
+|--------------|--------------|---------|
+| **Patch** | Bug fixes, small improvements | 1.0.0 → 1.0.1 |
+| **Minor** | New features, backward-compatible | 1.0.0 → 1.1.0 |
+| **Major** | Breaking changes | 1.0.0 → 2.0.0 |
+
+### Automatic updates
+
+- **JitPack** - Automatically builds from GitHub on each tag push
+- **GitHub Packages** - Workflow runs on release creation
+- **Maven Central** - Requires manual upload or working CI/CD
+
+### Updating your dependency
 
 ```xml
 <!-- Maven -->
-<version>1.1.0</version>
+<dependency>
+    <groupId>io.github.jhonmysoftware</groupId>
+    <artifactId>secure-data-factory-core</artifactId>
+    <version>1.0.1</version>  <!-- change version -->
+</dependency>
 ```
 
 ```groovy
 // Gradle
-implementation 'io.github.jhonmysoftware:secure-data-factory-core:1.1.0'
+implementation 'io.github.jhonmysoftware:secure-data-factory-core:1.0.1'
 ```
+
+### Release process
+
+1. Update version in `pom.xml`: `<version>1.0.1</version>`
+2. Commit changes: `git commit -m "Release 1.0.1"`
+3. Create tag: `git tag v1.0.1`
+4. Push: `git push && git push --tags`
+5. GitHub Actions will automatically:
+   - Build and test
+   - Publish to GitHub Packages
+   - Create GitHub Release with JAR
+
+Check for new releases: https://github.com/JhonmySoftware/secure-data-factory/releases
 
 To see all available versions, visit Maven Central: https://search.maven.org/artifact/io.github.jhonmysoftware/secure-data-factory-core

@@ -33,6 +33,8 @@ import java.util.Optional;
  *
  * <p>Policies are looked up by name and can be applied in chain to a record.
  * Comes pre-loaded with the built-in {@link GDPRPolicy}.</p>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class SecurityPolicyRegistry {
 

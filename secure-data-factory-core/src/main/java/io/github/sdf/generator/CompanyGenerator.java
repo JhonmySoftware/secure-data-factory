@@ -30,6 +30,8 @@ import java.util.UUID;
  * <p>Company names, addresses, references and websites are dummy-only and are
  * intentionally produced with clearly synthetic markers plus the reserved
  * {@code .example} domain.</p>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public class CompanyGenerator implements DataGenerator<Company> {
 

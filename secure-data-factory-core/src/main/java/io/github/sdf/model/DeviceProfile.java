@@ -21,6 +21,8 @@ import java.util.Objects;
 
 /**
  * Represents a synthetic device or client profile for QA and integration testing.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeviceProfile {

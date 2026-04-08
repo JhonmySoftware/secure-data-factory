@@ -22,6 +22,8 @@ import io.github.sdf.model.Person;
  *
  * <p>Implement this interface to enforce organization-specific or regulatory
  * constraints (GDPR, HIPAA, PCI-DSS, etc.) on generated records.</p>
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public interface SecurityPolicy {
 

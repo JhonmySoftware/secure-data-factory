@@ -23,6 +23,8 @@ import java.util.Objects;
 /**
  * Represents a person entity with personally identifiable information (PII).
  * All fields follow data minimization principles.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {

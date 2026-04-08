@@ -21,6 +21,11 @@ import io.github.sdf.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Enforces Colombian data protection law (Ley 1581 of 2012) compliance.
+ *
+ * @author Jhon Quiñones Arboleda
+ */
 public class ColombianDataProtectionPolicy implements SecurityPolicy {
 
     private static final Logger log = LoggerFactory.getLogger(ColombianDataProtectionPolicy.class);

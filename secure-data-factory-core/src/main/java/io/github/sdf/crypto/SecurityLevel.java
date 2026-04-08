@@ -18,6 +18,8 @@ package io.github.sdf.crypto;
 /**
  * Defines the available security levels for data encryption and anonymization.
  * Each level determines the algorithm strength and anonymization depth.
+ *
+ * @author Jhon Quiñones Arboleda
  */
 public enum SecurityLevel {
 
