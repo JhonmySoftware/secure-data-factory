@@ -48,7 +48,7 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 
 ## Quick Start
 
-### Maven dependency
+### Option 1: Maven Central (recommended)
 
 ```xml
 <dependency>
@@ -58,21 +58,59 @@ For the detailed statement, see [docs/DUMMY_DATA_SCOPE.md](docs/DUMMY_DATA_SCOPE
 </dependency>
 ```
 
-### Gradle dependency
-
 ```groovy
 dependencies {
     implementation 'io.github.jhonmysoftware:secure-data-factory-core:1.0.0'
 }
 ```
 
-Or for Kotlin DSL:
+### Option 2: JitPack (GitHub-based)
 
-```kotlin
-dependencies {
-    implementation("io.github.jhonmysoftware:secure-data-factory-core:1.0.0")
-}
+Add JitPack repository:
+
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 ```
+
+```xml
+<dependency>
+    <groupId>com.github.JhonmySoftware</groupId>
+    <artifactId>secure-data-factory-core</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+```groovy
+implementation 'com.github.JhonmySoftware:secure-data-factory-core:1.0.0'
+```
+
+### Option 3: GitHub Packages
+
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/JhonmySoftware/secure-data-factory</url>
+    </repository>
+</repositories>
+```
+
+```xml
+<dependency>
+    <groupId>io.github.jhonmysoftware</groupId>
+    <artifactId>secure-data-factory-core</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+### Option 4: Direct JAR download
+
+Download from [GitHub Releases](https://github.com/JhonmySoftware/secure-data-factory/releases) and add to your classpath.
 
 ### Gradle repository (if using older Gradle versions)
 

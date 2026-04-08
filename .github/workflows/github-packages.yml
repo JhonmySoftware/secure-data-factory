@@ -1,0 +1,38 @@
+name: GitHub Packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+
+      - name: Build JAR
+        run: mvn clean package -DskipTests -f secure-data-factory-core/pom.xml
+
+      - name: Configure GitHub Packages
+        run: |
+          sed -i 's|<id>ossrh</id>|<id>github</id>|g' pom.xml
+          sed -i 's|<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>|<url>https://maven.pkg.github.com/JhonmySoftware/secure-data-factory/</url>|g' pom.xml
+
+      - name: Publish to GitHub Packages
+        run: mvn deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: JhonmySoftware
+          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
