@@ -29,13 +29,13 @@ jobs:
       - name: Set project version
         run: mvn --batch-mode versions:set -DnewVersion=${{ steps.version.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Build with source only (skip javadoc for now)
-        run: mvn --batch-mode clean package source:jar -DskipTests -Dmaven.javadoc.skip=true
+      - name: Build with install (generates POM)
+        run: mvn --batch-mode clean install -DskipTests -Dmaven.javadoc.skip=true -DskipSourceJar=true
 
       - name: Debug - list files
         run: |
           echo "Current directory: $(pwd)"
-          echo "Files in target:"
+          echo "Files in core target:"
           ls -la secure-data-factory-core/target/
 
       - name: Upload to Central Portal
@@ -59,11 +59,6 @@ jobs:
           curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
             -H "Authorization: Bearer ${BEARER_TOKEN}" \
             -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}.jar"
-          
-          echo "Uploading Sources JAR..."
-          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
-            -H "Authorization: Bearer ${BEARER_TOKEN}" \
-            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}-sources.jar"
 
       - name: Publish deployment
         run: |
