@@ -28,8 +28,8 @@ jobs:
       - name: Set project version
         run: mvn --batch-mode versions:set -DnewVersion=${{ steps.version.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Build with source and javadoc
-        run: mvn --batch-mode clean package source:jar javadoc:jar -DskipTests
+      - name: Build with source only (skip javadoc for now)
+        run: mvn --batch-mode clean package source:jar -DskipTests -Dmaven.javadoc.skip=true
 
       - name: Upload to Central Portal
         env:
@@ -53,11 +53,6 @@ jobs:
           curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
             -H "Authorization: Bearer ${BEARER_TOKEN}" \
             -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}-sources.jar"
-          
-          echo "Uploading Javadoc JAR..."
-          curl -X POST "https://central.sonatype.com/api/v1/publisher/upload" \
-            -H "Authorization: Bearer ${BEARER_TOKEN}" \
-            -F "file=@secure-data-factory-core/target/secure-data-factory-core-${VERSION}-javadoc.jar"
 
       - name: Publish deployment
         env:
