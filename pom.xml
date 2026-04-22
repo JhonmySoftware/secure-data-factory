@@ -54,7 +54,7 @@
         <faker.version>1.0.2</faker.version>
 
         <!-- Publishing -->
-        <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
+        <maven.source.plugin.version>3.4.0</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.2.4</maven.gpg.plugin.version>
         <maven.nexus.staging.plugin.version>1.6.13</maven.nexus.staging.plugin.version>
